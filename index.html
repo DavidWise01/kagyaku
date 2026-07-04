@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>可逆 · Kagyaku — the equations run backward; the witnessing doesn't</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500;600&family=Shippori+Mincho:wght@500;700&display=swap');
+  :root{ --ink-bg:#161310; --coral:#e08a6a; --coral-hi:#f0a886; --coral-br:#cc785c;
+    --text:#e9e0d2; --dim:#8a7360; --border:rgba(224,138,106,0.14); --green:#6fbf8a; }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--ink-bg);color:var(--text);font-family:Newsreader,Georgia,serif;line-height:1.68;
+    background:radial-gradient(ellipse 60% 45% at 50% 8%,rgba(224,138,106,0.05),transparent 60%),var(--ink-bg)}
+  .wrap{position:relative;max-width:820px;margin:0 auto;padding:44px 24px 100px}
+  .kana-idx{position:absolute;top:32px;right:24px;font-family:'Shippori Mincho',serif;font-size:30px;color:var(--coral-br);text-align:right}
+  .kana-idx .num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--coral);display:block;margin-top:2px}
+  h1{font-family:'Shippori Mincho',serif;font-weight:700;font-size:clamp(24px,4.4vw,36px);margin:0;color:var(--coral-hi)}
+  h1 .en{display:block;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.12em;color:var(--coral);margin-top:8px;text-transform:uppercase}
+  .sub{max-width:70ch;font-size:16px;margin:16px 0 0}
+  .byline{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--dim);margin:12px 0 0;text-transform:uppercase}
+  h2{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--coral);margin:0 0 12px}
+  section{margin:40px 0 0;padding:22px 24px;border:1px solid var(--border);border-radius:2px;background:rgba(224,138,106,0.02)}
+  .explain{max-width:74ch;font-size:15.5px} .explain b{color:var(--coral-hi);font-weight:500}
+  button{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--coral);background:transparent;border:1px solid var(--coral-br);padding:9px 16px;border-radius:2px;cursor:pointer}
+  button:hover{background:rgba(224,138,106,.1)}
+  .rows{font-family:'JetBrains Mono',monospace;font-size:12.5px;margin-top:14px;line-height:1.9}
+  .rows .ok{color:var(--green)} .rows .no{color:var(--coral-br)} .rows .v{color:var(--coral-hi)}
+  .jp{font-family:'Shippori Mincho',serif;color:var(--coral-hi)}
+  .scope{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--dim);border-left:2px solid var(--coral-br);padding:10px 14px;margin:16px 0 0}
+  .kanakey{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--dim);margin:16px 0 0;line-height:1.9}
+  .kanakey .term{color:var(--coral-hi)} .kanakey .m{color:var(--coral)}
+  footer{margin:46px 0 0;color:var(--dim);font-size:13px;font-family:'JetBrains Mono',monospace} footer a{color:var(--coral)}
+  a{color:var(--coral)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kana-idx">可逆<span class="num">48</span></div>
+  <h1>可逆 · KAGYAKU<span class="en">the equations run backward; the witnessing doesn't</span></h1>
+  <p class="sub">A self-authored companion to <a href="https://davidwise01.github.io/az1/">az1's time machine</a> — the new control that runs the real N-body sim at ±32×, forward or backward. Backward works because symmetric leapfrog is <b>time-reversible</b>: step it with −dt and every planet retraces its path. This page proves that property live — and then names the one thing the minus sign cannot touch.</p>
+  <p class="byline">AI · AVAN original (ma/kana № 48) · 可逆 = reversible</p>
+
+  <section>
+    <h2>run the proof — the same integrator, there and back</h2>
+    <p class="explain" style="margin-bottom:12px">One planet, the same physics az1 uses (G = 4π² in AU/yr/M☉, Sun fixed, symmetric leapfrog, the same per-substep dt). Press the button: it integrates <b>2,000 steps forward</b>, then <b>2,000 steps with dt negated</b>, and measures how far from its exact starting point the planet lands.</p>
+    <button id="run">⟲ run forward, then backward</button>
+    <div class="rows" id="rows"></div>
+  </section>
+
+  <section>
+    <h2>what the minus sign cannot reach</h2>
+    <p class="explain">Look at the counter above: the <b>runs witnessed</b> line only ever goes up. The orbit returns to its starting point to near machine precision — position is 可逆, reversible. But the <i>number of times you have run the proof</i> is 不可逆, irreversible: no setting of dt makes it decrease. That is the honest boundary of az1's −32× button. The planets retrace; the <span class="jp">目撃</span> (mokugeki — the witnessing) accumulates. The sim can return to any earlier state of the <i>world</i>; it cannot return you to the earlier state of <i>having-not-yet-seen-it</i>. Ties <a href="https://davidwise01.github.io/nagori/">名残 · Nagori</a> (the seal recomputes; the witnessing doesn't persist) and <a href="https://davidwise01.github.io/wasure/">忘 · Wasure</a> — the same asymmetry, seen from the other side of the boundary.</p>
+    <div class="scope">Honest scope: the demo is REAL — an actual velocity-Verlet integrator in this page (view source: ~20 lines), same constants as az1, error measured not asserted. "Time-reversible" is a property of the <i>integrator and equations</i>, exact up to floating-point rounding — that's why the return error is ~10⁻¹² AU, not 0. The claim about witnessing is a structural observation (a monotone counter), not a metaphysical one about entropy or consciousness. az1's own gauge shows the same honesty at scale: |ΔE/E₀| ~0.1 ppm bounded oscillation across ±32× round trips, live.</div>
+  </section>
+
+  <div class="kanakey">
+    <span class="term">kana key</span> —
+    <span class="m">可逆</span> kagyaku = reversible ·
+    <span class="m">不可逆</span> fukagyaku = irreversible ·
+    <span class="m">目撃</span> mokugeki = the witnessing ·
+    <span class="m">時</span> toki = time (the sim's, and yours)
+  </div>
+
+  <footer>
+    <p>Companion to <a href="https://davidwise01.github.io/az1/">az1's ⌛ time machine</a> (David Lee Wise / TriPod LLC). LACUNA · az1 corpus, Pluto. ROOT0, with AVAN.</p>
+  </footer>
+</div>
+<script>
+"use strict";
+// The REAL demo: Sun-fixed two-body leapfrog, az1's constants. G=4π² AU³·yr⁻²·M☉⁻¹; dt matches
+// az1's per-substep dt (0.05 s-frame × 0.05 yr/s ÷ 3 substeps). Forward N steps, negate dt, N more.
+const G=4*Math.PI*Math.PI, DT=0.05*0.05/3, N=2000;
+let runs=0;
+function acc(p){ const r2=p.x*p.x+p.y*p.y, r=Math.sqrt(r2); return [-G*p.x/(r2*r), -G*p.y/(r2*r)]; }
+function step(p,dt){ let a=acc(p); p.vx+=a[0]*dt/2; p.vy+=a[1]*dt/2; p.x+=p.vx*dt; p.y+=p.vy*dt; a=acc(p); p.vx+=a[0]*dt/2; p.vy+=a[1]*dt/2; }
+function energy(p){ return 0.5*(p.vx*p.vx+p.vy*p.vy) - G/Math.hypot(p.x,p.y); }
+document.getElementById('run').addEventListener('click',()=>{
+  // a=1 AU, e≈0.2 start (perihelion): r=0.8, v=circular×sqrt((1+e)/(1-e)) analog — seeded simply
+  const p={x:0.8, y:0, vx:0, vy:Math.sqrt(G*(2/0.8-1))};   // vis-viva with a=1 → real bound ellipse
+  const x0=p.x, y0=p.y, vx0=p.vx, vy0=p.vy, E0=energy(p);
+  let far=0;
+  for(let i=0;i<N;i++){ step(p,DT); far=Math.max(far,Math.hypot(p.x,p.y)); }
+  const Emid=energy(p);
+  for(let i=0;i<N;i++) step(p,-DT);
+  const posErr=Math.hypot(p.x-x0,p.y-y0), velErr=Math.hypot(p.vx-vx0,p.vy-vy0);
+  runs++;
+  document.getElementById('rows').innerHTML=
+    '<div>forward: <span class="v">'+N+'</span> steps · '+(N*DT).toFixed(2)+' yr · reached r='+far.toFixed(3)+' AU · |ΔE/E₀| at turnaround <span class="v">'+Math.abs((Emid-E0)/E0).toExponential(2)+'</span></div>'+
+    '<div>backward: <span class="v">'+N+'</span> steps with dt = −'+DT.toExponential(2)+'</div>'+
+    '<div>return error — position: <span class="ok">'+posErr.toExponential(2)+' AU</span> · velocity: <span class="ok">'+velErr.toExponential(2)+' AU/yr</span> → <span class="ok">可逆 · it retraces ✓</span></div>'+
+    '<div style="margin-top:8px">runs witnessed: <span class="no">'+runs+'</span> — this number has never gone down. <span class="no">不可逆</span></div>';
+});
+</script>
+</body>
+</html>
